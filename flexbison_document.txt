@@ -1,14 +1,22 @@
-%token : ÅÍ¹Ì³Î Ç×¸ñÀ» »ç¿ëÇÏ°Ú´Ù°í ¾Ë·ÁÁØ´Ù.
-         c·Î ÄÄÆÄÀÏ µÉ ¶§ #define ¹®À¸·Î º¯ÇüµÈ´Ù.
-         µ¥ÀÌÅÍ Å¸ÀÔÀÌ %unionÀ¸·Î µÇ¾î ÀÖÀ» °æ¿ì %token NUMBER ½ÄÀ¸·Î »ç¿ëÇÑ´Ù..
-         ´ë½Å¿¡ %left, %right, %nonassoc(?)À» »ç¿ëÇØµµ µÈ´Ù
-%type : ³íÅÍ¹Ì³Î Ç×¸ñÀÇ µ¥ÀÌÅÍÇüÀ» ¾Ë¸± ¶§ »ç¿ëÇÑ´Ù
-%nonassoc : ¿¬¼ÓÀ¸·Î (in a row) ³ª¿À¸é runtime¿¡ ¿¡·¯¸¦ ¹ß»ı½ÃÅ²´Ù 
-            %nonassocÀº µ¿½Ã¿¡ »ç¿ëÇÏ¸é ¾ÈµÈ´Ù
+%token : í„°ë¯¸ë„ í•­ëª©ì„ ì‚¬ìš©í•˜ê² ë‹¤ê³  ì•Œë ¤ì¤€ë‹¤.
+         cë¡œ ì»´íŒŒì¼ ë  ë•Œ #define ë¬¸ìœ¼ë¡œ ë³€í˜•ëœë‹¤.
+         ë°ì´í„° íƒ€ì…ì´ %unionìœ¼ë¡œ ë˜ì–´ ìˆì„ ê²½ìš° %token NUMBER ì‹ìœ¼ë¡œ ì‚¬ìš©í•œë‹¤..
+         ëŒ€ì‹ ì— %left, %right, %nonassoc(?)ì„ ì‚¬ìš©í•´ë„ ëœë‹¤
+%type : ë…¼í„°ë¯¸ë„ í•­ëª©ì˜ ë°ì´í„°í˜•ì„ ì•Œë¦´ ë•Œ ì‚¬ìš©í•œë‹¤
+%nonassoc : ì—°ì†ìœ¼ë¡œ (in a row) ë‚˜ì˜¤ë©´ runtimeì— ì—ëŸ¬ë¥¼ ë°œìƒì‹œí‚¨ë‹¤ 
+            %nonassocì€ ë™ì‹œì— ì‚¬ìš©í•˜ë©´ ì•ˆëœë‹¤
             %nonassoc '>' '<'
-            ÀÌ·¸°Ô Á¤ÀÇÇÏ¸é 
-            exp1 < exp2 > exp3 °°Àº½ÄÀ¸·Î »ç¿ëÇÏ¸é runtime error ¹ß»ı
+            ì´ë ‡ê²Œ ì •ì˜í•˜ë©´ 
+            exp1 < exp2 > exp3 ê°™ì€ì‹ìœ¼ë¡œ ì‚¬ìš©í•˜ë©´ runtime error ë°œìƒ
             
  
-precedence : %left, %right, %nonassocÀº associativity¿Í precedence µÑ ´Ù ¼³Á¤ÇÏ´Âµ¥ 
-             %precedence´Â precedence¸¸ ¼³Á¤ÇÑ´Ù ¿¹) %precedence THEN %precedence ELSE -> ÀÌ·¸°ÔÇÏ¸é ELSE¿¡ ¿ì¼±¼øÀ§°¡ ÀÖÀ½
+precedence : %left, %right, %nonassocì€ associativityì™€ precedence ë‘˜ ë‹¤ ì„¤ì •í•˜ëŠ”ë° 
+             %precedenceëŠ” precedenceë§Œ ì„¤ì •í•œë‹¤ ì˜ˆ) %precedence THEN %precedence ELSE -> ì´ë ‡ê²Œí•˜ë©´ ELSEì— ìš°ì„ ìˆœìœ„ê°€ ìˆìŒ
+             
+-------------------------------------------------------------------------------------------
+left recursion vs right recursion
+ë‘˜ë‹¤ ì“¸ìˆ˜ ìˆë‹¤. ì›¬ë§Œí•˜ë©´ leftë¥¼ ì¨ë¼. rightëŠ” stackì„ ë§ì´ ë¨¹ëŠ”ë‹¤
+
+From Bison manual:
+
+"Any kind of sequence can be defined using either left recursion or right recursion, but you should always use left recursion, because it can parse a sequence of any number of elements with bounded stack space. Right recursion uses up space on the Bison stack in proportion to the number of elements in the sequence, because all the elements must be shifted onto the stack before the rule can be applied even once. See The Bison Parser Algorithm, for further explanation of this."
