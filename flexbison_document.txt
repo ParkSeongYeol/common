@@ -19,4 +19,8 @@ left recursion vs right recursion
 
 From Bison manual:
 
-"Any kind of sequence can be defined using either left recursion or right recursion, but you should always use left recursion, because it can parse a sequence of any number of elements with bounded stack space. Right recursion uses up space on the Bison stack in proportion to the number of elements in the sequence, because all the elements must be shifted onto the stack before the rule can be applied even once. See The Bison Parser Algorithm, for further explanation of this."
+"Any kind of sequence can be defined using either left recursion or right recursion,
+but you should always use left recursion, because it can parse a sequence of any number of elements with bounded stack space.
+Right recursion uses up space on the Bison stack in proportion to the number of elements in the sequence,
+because all the elements must be shifted onto the stack before the rule can be applied even once.
+See The Bison Parser Algorithm, for further explanation of this."
