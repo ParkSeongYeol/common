@@ -1,0 +1,49 @@
+
+
+-------  Thread_1  ------------------------------------
+FThreadComplete = true;
+FStopButtonClicked = false;
+
+while (true)
+beign
+  if (FStopButtonClicked = true) then
+  begin
+    WaitFor(SomeEvent);
+	if FTerminated = true then
+	  break;
+  end;
+  
+  SendMessage(WM_USER_SOME_MESSAGE);	
+  
+  DO SOMETHING....
+
+  FThreadComplete = true;
+end;
+
+-------  Main Thread의 WM_USER_SOME_MESSAGE  ------------------------------------
+begin
+  Thread_1.FThreadComplete = false;
+end;
+
+---------------------------------------------------
+Thread를 일시 중지 시키고 싶으면
+
+1. FStopButtonClicked = true로 한다
+2. FThreadComplete가 true일 때까지 기다린다.
+
+
+
+//////////////////////////////////////////////////////////////////////////
+Timer 사용하는 Thread
+
+초기값 Thread.QueryComplete := False
+OnQueryXXX를 실행하면 Thread.QueryComplete = True가 됨
+
+
+Timer에서
+FQueryComplete = True 이면
+Thread.QueryComplete := False로 하고
+Thread.QueryStart.SetEvent
+
+FQueryComplete = False 이면
+아무것도 안 함
